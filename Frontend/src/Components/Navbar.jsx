@@ -12,10 +12,10 @@ function Navbar() {
     <nav className="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-zinc-100 flex items-center justify-between px-8 h-20 transition-all duration-500 ease-in-out">
       <div className="flex items-center gap-3 group px-4">
         <div className="w-8 h-8 bg-zinc-900 rounded-lg flex items-center justify-center transition-transform group-hover:rotate-[15deg] duration-300">
-          <span className="text-white font-black text-xs">M+</span>
+          <span className="text-white font-black text-xs">C+</span>
         </div>
-        <h1 className="text-sm font-bold uppercase tracking-[0.3em] text-zinc-900">
-          MediConnect
+        <h1 className="text-sm font-bold uppercase tracking-[0.2em] text-zinc-900">
+          Click <span className="text-xl text-fuchsia-600 font-bold">2</span> Cure
         </h1>
       </div>
 
