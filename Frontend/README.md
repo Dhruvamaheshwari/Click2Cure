@@ -1,16 +1,68 @@
-# React + Vite
+<!-- @format -->
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# MediConnect Frontend - Patient Interface
 
-Currently, two official plugins are available:
+A high-contrast, minimalist healthcare terminal built for professional clinical interaction.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## 🎨 Design Philosophy - "GPT Minimal"
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Palette**: Zinc Gray, Pure White, and Backdrop-blur glassmorphism.
+- **Typography**: Tight tracking, strong uppercase labels.
+- **Interactions**: Subtle "Protocol" pulse indicators and slide-in entrance animations.
+- **Responsive**: Fluid layouts across all digital viewports.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🏗️ Technical Matrix
+
+- **Framework**: React 19 (Vite)
+- **Styling**: Tailwind CSS (v4 Alpha)
+- **Routing**: React Router 7 (Data API)
+- **State**: Context API for global session persistence.
+- **Client**: Axios for backend synchronization.
+
+---
+
+## 📂 Interface Structure
+
+- **`/src/Components`**: Shared UI blocks (Navbar, Authenticator, Global Context).
+- **`/src/Doctor`**: Specialized terminal for medical specialist interactions.
+- **`/src/Patient`**: User-centric modules for appointment protocols and archives.
+- **`/assets`**: Clinical icons and media assets.
+
+---
+
+## 🧪 Quick Setup
+
+1. **Install Interface Modules**:
+
+   ```bash
+   npm install
+   ```
+
+2. **Initialize Development Mode**:
+
+   ```bash
+   npm run dev
+   ```
+
+3. **Build Production Image**:
+   ```bash
+   npm run build
+   ```
+
+---
+
+## 🔐 Session Management
+
+The interface uses `localStorage` for state hydration across refreshes. The global `DataContext` ensures consistent authentication state for the following keys:
+
+- `isLoggin`: session status.
+- `isrole`: identity classification.
+- `userId`: unique identifier.
+
+---
+
+_MediConnect Frontend Node._
