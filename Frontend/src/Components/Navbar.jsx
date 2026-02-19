@@ -3,10 +3,27 @@
 import { useContext } from "react";
 import DataContext from "./DataContext";
 import { Link, useNavigate } from "react-router";
+import axios from "axios";
 
 function Navbar() {
-  const { isLoggin, setIsloggin, isrole } = useContext(DataContext);
+  const { isLoggin, setIsloggin, isrole, setIsrole, setUserId } = useContext(DataContext);
   const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      const res = await axios.get("http://localhost:4000/logout", {
+        withCredentials: true,
+      });
+      if (res.data.succ) {
+        setIsloggin(false);
+        setIsrole(null);
+        setUserId(null);
+        navigate("/login");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <nav className="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-zinc-100 flex items-center justify-between px-8 h-20 transition-all duration-500 ease-in-out">
@@ -21,67 +38,57 @@ function Navbar() {
 
       <div className="flex items-center gap-12 font-medium">
         {isLoggin && isrole === "doctor" && (
-          <div className="flex gap-8 items-center animate-in fade-in slide-in-from-top-2 duration-700 font-bold uppercase tracking-widest text-[10px]">
+          <div className="flex gap-8 items-center animate-in fade-in slide-in-from-top-2 duration-700 font-semibold tracking-tight text-sm">
             <Link
               to="/dhome"
-              className="text-zinc-400 hover:text-zinc-900 transition-colors px-2 py-1">
-              Registry
+              className="text-gray-500 hover:text-blue-600 transition-colors">
+              Home
             </Link>
-            <div className="text-zinc-400 hover:text-zinc-900 transition-colors px-2 py-1 cursor-pointer">
-              Protocol
-            </div>
+            <Link
+              to="/doctorviewapp"
+              className="text-gray-500 hover:text-blue-600 transition-colors">
+              Appointments
+            </Link>
             <button
-              onClick={() => {
-                localStorage.clear();
-                setIsloggin(false);
-                navigate("/login");
-              }}
-              className="bg-zinc-900 text-white px-6 py-2.5 rounded-full hover:bg-zinc-800 transition-all active:scale-95 shadow-xl shadow-zinc-100">
+              onClick={handleLogout}
+              className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-all active:scale-95 shadow-sm">
               Sign Out
             </button>
           </div>
         )}
 
         {isLoggin && isrole === "patient" && (
-          <div className="flex gap-10 items-center animate-in fade-in slide-in-from-top-2 duration-700 font-bold uppercase tracking-[0.15em] text-[10px]">
+          <div className="flex gap-8 items-center animate-in fade-in slide-in-from-top-2 duration-700 font-semibold tracking-tight text-sm">
             <Link
               to="/phome"
-              className="text-zinc-400 hover:text-zinc-900 transition-colors">
-              Interface
+              className="text-gray-500 hover:text-blue-600 transition-colors">
+              Home
             </Link>
             <Link
               to="/application"
-              className="text-zinc-400 hover:text-zinc-900 transition-colors">
-              Booking
+              className="text-gray-500 hover:text-blue-600 transition-colors">
+              Book Appointment
             </Link>
             <Link
               to="/viewapp"
-              className="text-zinc-400 hover:text-zinc-900 transition-colors">
-              Archives
+              className="text-gray-500 hover:text-blue-600 transition-colors">
+              My History
             </Link>
-            <button
-              onClick={() => {
-                localStorage.clear();
-                setIsloggin(false);
-                navigate("/login");
-              }}
-              className="bg-zinc-900 text-white px-6 py-2.5 rounded-full hover:bg-zinc-800 transition-all active:scale-95 shadow-lg shadow-zinc-100">
-              Log Out
-            </button>
+            <button onClick={ handleLogout}>Logout </button>
           </div>
         )}
 
         {!isLoggin && (
-          <div className="flex gap-8 items-center animate-in fade-in slide-in-from-top-2 duration-700 font-bold uppercase tracking-widest text-[10px]">
+          <div className="flex gap-8 items-center animate-in fade-in slide-in-from-top-2 duration-700 font-semibold tracking-tight text-sm">
             <Link
               to="/login"
-              className="text-zinc-400 hover:text-zinc-900 transition-colors">
-              Enrolment
+              className="text-gray-500 hover:text-blue-600 transition-colors">
+              Log In
             </Link>
             <Link
               to="/reg"
-              className="bg-zinc-900 text-white px-8 py-3 rounded-full hover:shadow-2xl hover:shadow-zinc-200 transition-all active:scale-95">
-              Join Network
+              className="bg-blue-600 text-white px-8 py-2.5 rounded-lg hover:bg-blue-700 hover:shadow-md transition-all active:scale-95">
+              Create Account
             </Link>
           </div>
         )}

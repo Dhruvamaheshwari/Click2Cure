@@ -40,105 +40,69 @@ const ViewApp = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white text-zinc-900 selection:bg-zinc-100 pt-32 pb-20 px-8 font-sans">
-      <div className="max-w-4xl mx-auto space-y-16 animate-in fade-in slide-in-from-bottom-5 duration-1000">
-        <header className="flex flex-col md:flex-row justify-between items-end gap-6 border-b border-zinc-100 pb-12">
-          <div className="space-y-4 text-left">
-            <h2 className="text-5xl font-semibold tracking-tighter">
-              Clinical Ledger
-            </h2>
-            <p className="text-zinc-400 text-sm font-medium italic">
-              Archive of all verified and pending medical interactions.
+    <div className="min-h-screen bg-gray-50 pt-32 pb-20 px-6 font-sans">
+      <div className="max-w-4xl mx-auto space-y-12 animate-in fade-in slide-in-from-bottom-5 duration-1000">
+        <header className="flex flex-col md:flex-row justify-between items-center gap-6 border-b border-gray-200 pb-10">
+          <div className="space-y-2 text-center md:text-left">
+            <h1 className="text-4xl font-bold tracking-tight text-gray-900">
+              My Appointments
+            </h1>
+            <p className="text-gray-500 font-medium">
+              View and track all your scheduled consultations.
             </p>
           </div>
-          <div className="flex items-center gap-3 px-4 py-2 bg-zinc-50 border border-zinc-100 rounded-full">
-            <div className="w-1.5 h-1.5 bg-zinc-900 rounded-full animate-pulse"></div>
-            <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-500">
-              Live Synchronization
-            </span>
+          <div className="bg-blue-600 text-white px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest shadow-lg shadow-blue-100">
+            {appointment.length} Total Appointments
           </div>
         </header>
 
-        <div className="space-y-4">
+        <div className="grid grid-cols-1 gap-6">
           {appointment.length > 0 ?
             appointment.map((val, ind) => (
               <div
                 key={ind}
-                className="group relative bg-white border border-zinc-100 rounded-3xl p-8 hover:border-zinc-900 transition-all duration-500 hover:shadow-2xl hover:shadow-zinc-100">
-                <div className="flex flex-col md:flex-row justify-between gap-12">
-                  <div className="space-y-6 flex-1">
-                    <div className="space-y-1">
-                      <label className="text-[10px] font-bold uppercase tracking-[0.3em] text-zinc-400">
-                        Practitioner Node
-                      </label>
-                      <h3 className="text-xl font-semibold tracking-tight group-hover:italic transition-all">
-                        Dr. {val.doctorId.name}
-                      </h3>
-                      <p className="text-xs text-zinc-400 font-medium font-mono lowercase">
-                        {val.doctorId.email}
-                      </p>
+                className="group bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-xl hover:shadow-blue-50 transition-all duration-300">
+                <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+                  <div className="flex items-center gap-5">
+                    <div className="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center text-2xl">
+                      👨‍⚕️
                     </div>
-
-                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 pt-6 border-t border-zinc-50">
-                      <div className="space-y-1">
-                        <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-300">
-                          Timeline
-                        </span>
-                        <p className="text-xs font-bold text-zinc-600">
-                          {val.date}
-                        </p>
-                      </div>
-                      <div className="space-y-1">
-                        <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-300">
-                          Slot
-                        </span>
-                        <p className="text-xs font-bold text-zinc-600">
-                          {val.time}
-                        </p>
-                      </div>
-                      <div className="space-y-1 col-span-2">
-                        <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-300">
-                          Protocol ID
-                        </span>
-                        <p className="text-[10px] font-mono font-medium text-zinc-400 uppercase tracking-tighter">
-                          {val._id}
-                        </p>
-                      </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-gray-900">
+                        Dr. {val.doctorId?.name || "Unknown"}
+                      </h3>
+                      <p className="text-gray-500 text-sm font-medium">
+                        {val.doctorId?.email || "No email available"}
+                      </p>
                     </div>
                   </div>
 
-                  <div className="flex flex-col justify-between items-end gap-6 min-w-[140px]">
-                    <div
-                      className={`px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] border transition-all duration-500 ${
-                        val.status === "approved" ?
-                          "bg-zinc-900 text-white border-zinc-900"
-                        : val.status === "reject" ?
-                          "bg-white text-zinc-300 border-zinc-100"
-                        : "bg-zinc-50 text-zinc-500 border-zinc-200"
-                      }`}>
-                      {val.status}
+                  <div className="flex flex-wrap gap-4 items-center">
+                    <div className="bg-gray-50 px-4 py-2 rounded-xl border border-gray-100">
+                      <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-0.5">Date</p>
+                      <p className="text-sm font-bold text-gray-700">{val.date}</p>
                     </div>
-                    <div className="text-right">
-                      <p className="text-[10px] font-bold uppercase tracking-widest text-zinc-300">
-                        Initialized
-                      </p>
-                      <p className="text-[10px] font-medium text-zinc-400">
-                        {new Date(val.createdAt).toLocaleDateString()}
-                      </p>
+                    <div className="bg-gray-50 px-4 py-2 rounded-xl border border-gray-100">
+                      <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-0.5">Time</p>
+                      <p className="text-sm font-bold text-gray-700">{val.time}</p>
+                    </div>
+                    <div className={`px-5 py-2.5 rounded-xl border text-sm font-bold shadow-sm ${getStatusColor(val.status)}`}>
+                      {val.status.toUpperCase()}
                     </div>
                   </div>
                 </div>
-
-                {/* Micro-interaction Hover Background */}
-                <div className="absolute inset-0 bg-zinc-50 opacity-0 group-hover:opacity-10 rounded-3xl -z-10 transition-opacity duration-500"></div>
               </div>
             ))
-          : <div className="text-center py-20 bg-zinc-50/50 rounded-3xl border border-dashed border-zinc-200 animate-pulse">
-              <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-zinc-400">
-                No active interactions found in primary node.
-              </p>
-            </div>
-          }
+            : (
+              <div className="bg-white rounded-3xl p-16 text-center border border-gray-100 shadow-sm">
+                <div className="text-5xl mb-6">📅</div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">No Appointments Yet</h3>
+                <p className="text-gray-500 mb-8 max-w-sm mx-auto">You haven't booked any consultations yet. Start by finding a specialist.</p>
+                <a href="/application" className="inline-block bg-blue-600 text-white px-8 py-3 rounded-xl font-bold hover:bg-blue-700 transition-all shadow-lg shadow-blue-100">
+                  Book Initial Appointment
+                </a>
+              </div>
+            )}
         </div>
       </div>
     </div>
@@ -146,3 +110,4 @@ const ViewApp = () => {
 };
 
 export default ViewApp;
+

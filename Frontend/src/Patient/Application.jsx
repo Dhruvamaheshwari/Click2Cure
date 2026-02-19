@@ -74,85 +74,76 @@ function Application() {
   ];
 
   return (
-    <div className="min-h-screen bg-white text-zinc-900 selection:bg-zinc-100 pt-32 pb-20 px-6 font-sans">
-      <div className="max-w-xl mx-auto space-y-16 animate-in fade-in slide-in-from-bottom-10 duration-1000">
-        <header className="space-y-4 text-center">
-          <h2 className="text-4xl font-semibold tracking-tighter">
-            Initialize Booking
-          </h2>
-          <p className="text-zinc-400 text-sm font-medium italic">
-            Protocol sequence: 01. Dept → 02. Practitioner → 03. Protocol
+    <div className="min-h-screen bg-gray-50 pt-32 pb-20 px-6 font-sans">
+      <div className="max-w-2xl mx-auto space-y-12 animate-in fade-in slide-in-from-bottom-5 duration-1000">
+        <header className="text-center space-y-4">
+          <h1 className="text-4xl font-bold tracking-tight text-gray-900 leading-tight">
+            Book an Appointment
+          </h1>
+          <p className="text-gray-500 max-w-md mx-auto">
+            Choose a department and your preferred doctor. Select a convenient time for your consultation.
           </p>
         </header>
 
-        <form onSubmit={handleSubmit} className="space-y-12">
+        <form onSubmit={handleSubmit} className="bg-white rounded-3xl shadow-xl shadow-blue-100/30 p-10 space-y-10 border border-gray-100">
           {/* Step 01: Department Selection */}
-          <section className="relative border-l border-zinc-100 pl-8 space-y-6 group">
-            <div className="absolute -left-[4.5px] top-0 w-2 h-2 bg-zinc-900 rounded-full"></div>
-            <div className="space-y-1">
-              <label className="text-[10px] font-bold uppercase tracking-[0.3em] text-zinc-400 group-hover:text-zinc-900 transition-colors">
-                01. Clinical Domain
-              </label>
-              <select
-                className="w-full bg-transparent border-b border-zinc-100 py-4 text-sm focus:border-zinc-900 focus:outline-none transition-all duration-500 rounded-none cursor-pointer"
-                value={selectedDept}
-                onChange={handleDeptChange}
-                required>
-                <option value="">Select Domain</option>
-                {departments.map((dept, ind) => (
-                  <option key={ind} value={dept}>
-                    {dept}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </section>
+          <div className="space-y-4">
+            <label className="flex items-center gap-2 text-sm font-bold text-gray-700 uppercase tracking-wider">
+              <span className="flex items-center justify-center w-6 h-6 bg-blue-100 text-blue-600 rounded-full text-xs">1</span>
+              Clinical Department
+            </label>
+            <select
+              className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-4 text-sm focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 focus:outline-none transition-all duration-300 cursor-pointer"
+              value={selectedDept}
+              onChange={handleDeptChange}
+              required>
+              <option value="">Select a Department</option>
+              {departments.map((dept, ind) => (
+                <option key={ind} value={dept}>
+                  {dept}
+                </option>
+              ))}
+            </select>
+          </div>
 
           {/* Step 02: Practitioner Selection */}
-          <section
-            className={`relative border-l border-zinc-100 pl-8 space-y-6 group transition-all duration-700 ${!selectedDept ? "opacity-20 pointer-events-none grayscale" : "opacity-100"}`}>
-            <div
-              className={`absolute -left-[4.5px] top-0 w-2 h-2 rounded-full transition-colors duration-500 ${selectedDept ? "bg-zinc-900" : "bg-zinc-100"}`}></div>
-            <div className="space-y-1">
-              <label className="text-[10px] font-bold uppercase tracking-[0.3em] text-zinc-400 group-hover:text-zinc-900 transition-colors">
-                02. Specialist Node
-              </label>
-              <select
-                name="doctorId"
-                className="w-full bg-transparent border-b border-zinc-100 py-4 text-sm focus:border-zinc-900 focus:outline-none transition-all duration-500 rounded-none cursor-pointer"
-                value={appointment.doctorId}
-                onChange={handleChange}
-                disabled={!selectedDept}
-                required>
-                <option value="">
-                  {selectedDept ?
-                    "Select Practitioner"
-                  : "Awaiting Domain Selection"}
+          <div className={`space-y-4 transition-all duration-500 ${!selectedDept ? "opacity-40 pointer-events-none" : "opacity-100"}`}>
+            <label className="flex items-center gap-2 text-sm font-bold text-gray-700 uppercase tracking-wider">
+              <span className="flex items-center justify-center w-6 h-6 bg-blue-100 text-blue-600 rounded-full text-xs">2</span>
+              Preferred Doctor
+            </label>
+            <select
+              name="doctorId"
+              className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-4 text-sm focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 focus:outline-none transition-all duration-300 cursor-pointer"
+              value={appointment.doctorId}
+              onChange={handleChange}
+              disabled={!selectedDept}
+              required>
+              <option value="">
+                {selectedDept ? "Select a Doctor" : "Please select a department first"}
+              </option>
+              {filteredDoctors.map((val, ind) => (
+                <option key={ind} value={val._id}>
+                  Dr. {val.name}
                 </option>
-                {filteredDoctors.map((val, ind) => (
-                  <option key={ind} value={val._id}>
-                    {val.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </section>
+              ))}
+            </select>
+          </div>
 
-          {/* Step 03: Temporal Protocol */}
-          <section
-            className={`relative border-l border-zinc-100 pl-8 space-y-10 group transition-all duration-700 ${!appointment.doctorId ? "opacity-20 pointer-events-none grayscale" : "opacity-100"}`}>
-            <div
-              className={`absolute -left-[4.5px] top-0 w-2 h-2 rounded-full transition-colors duration-500 ${appointment.doctorId ? "bg-zinc-900" : "bg-zinc-100"}`}></div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-              <div className="space-y-4">
-                <label className="text-[10px] font-bold uppercase tracking-[0.3em] text-zinc-400 block">
-                  03-A. Timeline
-                </label>
+          {/* Step 03: DateTime Selection */}
+          <div className={`space-y-6 transition-all duration-500 ${!appointment.doctorId ? "opacity-40 pointer-events-none" : "opacity-100"}`}>
+            <label className="flex items-center gap-2 text-sm font-bold text-gray-700 uppercase tracking-wider">
+              <span className="flex items-center justify-center w-6 h-6 bg-blue-100 text-blue-600 rounded-full text-xs">3</span>
+              Schedule Date & Time
+            </label>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="space-y-2">
+                <span className="text-xs font-semibold text-gray-500 ml-1">Select Date</span>
                 <input
                   type="date"
                   name="date"
-                  className="w-full bg-transparent border-b border-zinc-100 py-3 text-sm focus:border-zinc-900 focus:outline-none transition-all duration-500 rounded-none"
+                  className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 text-sm focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 focus:outline-none transition-all duration-300"
                   value={appointment.date}
                   onChange={handleChange}
                   min={new Date().toISOString().split("T")[0]}
@@ -160,17 +151,15 @@ function Application() {
                 />
               </div>
 
-              <div className="space-y-4">
-                <label className="text-[10px] font-bold uppercase tracking-[0.3em] text-zinc-400 block">
-                  03-B. Slot Window
-                </label>
+              <div className="space-y-2">
+                <span className="text-xs font-semibold text-gray-500 ml-1">Select Time Slot</span>
                 <select
                   name="time"
-                  className="w-full bg-transparent border-b border-zinc-100 py-3 text-sm focus:border-zinc-900 focus:outline-none transition-all duration-500 rounded-none cursor-pointer"
+                  className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 text-sm focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 focus:outline-none transition-all duration-300 cursor-pointer"
                   value={appointment.time}
                   onChange={handleChange}
                   required>
-                  <option value="">Select Window</option>
+                  <option value="">Available Slots</option>
                   <option value="10:00 AM">10:00 AM - 11:00 AM</option>
                   <option value="11:00 AM">11:00 AM - 12:00 PM</option>
                   <option value="12:00 PM">12:00 PM - 01:00 PM</option>
@@ -180,28 +169,24 @@ function Application() {
                 </select>
               </div>
             </div>
-          </section>
+          </div>
 
           <button
             type="submit"
-            className="group w-full bg-zinc-900 text-white font-bold h-20 rounded-full hover:bg-zinc-800 transition-all active:scale-[0.98] shadow-2xl shadow-zinc-200 flex items-center justify-center gap-6">
-            <span className="uppercase tracking-[0.4em] text-[10px]">
-              Execute Confirmation
-            </span>
-            <div className="w-6 h-6 border border-zinc-700 rounded-full flex items-center justify-center group-hover:bg-white group-hover:border-white group-hover:text-zinc-900 transition-all duration-500">
-              <svg
-                className="w-3 h-3"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={3}
-                  d="M5 13l4 4L19 7"
-                />
-              </svg>
-            </div>
+            className="w-full bg-blue-600 text-white font-bold py-4 rounded-xl hover:bg-blue-700 active:scale-[0.98] transition-all shadow-lg shadow-blue-200 flex items-center justify-center gap-3">
+            <span>Confirm Appointment</span>
+            <svg
+              className="w-5 h-5 group-hover:translate-x-1 transition-transform"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M5 13l4 4L19 7"
+              />
+            </svg>
           </button>
         </form>
       </div>
@@ -210,3 +195,4 @@ function Application() {
 }
 
 export default Application;
+

@@ -13,57 +13,57 @@ function Phome() {
                             </span>
                             <span className="text-[10px] uppercase font-bold tracking-widest text-zinc-500 font-mono">System Active • V.2.0</span>
                         </div>
-                        <h1 className="text-6xl md:text-8xl font-semibold tracking-tighter leading-[0.95] text-zinc-900">
-                            The New Standard <br />
-                            <span className="text-zinc-300 italic font-medium">In Care Control.</span>
+                        <h1 className="text-6xl md:text-7xl font-bold tracking-tight leading-[1.1] text-gray-900">
+                            Your Health, <br />
+                            <span className="text-blue-600">Simplified.</span>
                         </h1>
-                        <p className="text-lg md:text-xl text-zinc-500 max-w-xl font-medium tracking-tight leading-relaxed">
-                            A minimalist clinical interface designed for high-precision healthcare management. Access practitioners, schedule surgery, and monitor wellness with unified control.
+                        <p className="text-lg md:text-xl text-gray-500 max-w-xl font-medium leading-relaxed">
+                            Connect with top healthcare professionals, book appointments in seconds, and manage your medical history all in one place.
                         </p>
                     </div>
 
-                    <div className="flex flex-col sm:flex-row gap-6">
-                        <Link 
-                            to="/application" 
-                            className="bg-zinc-900 text-white px-10 py-5 rounded-full font-bold hover:bg-zinc-800 hover:shadow-2xl hover:shadow-zinc-300 transition-all active:scale-[0.98] uppercase tracking-[0.2em] text-[10px] text-center"
+                    <div className="flex flex-col sm:flex-row gap-4">
+                        <Link
+                            to="/application"
+                            className="bg-blue-600 text-white px-8 py-4 rounded-xl font-bold hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-200 transition-all active:scale-[0.98] text-center"
                         >
-                            Initialize Booking
+                            Book Appointment
                         </Link>
-                        <Link 
-                            to="/viewapp" 
-                            className="bg-white text-zinc-900 px-10 py-5 rounded-full font-bold border border-zinc-200 hover:border-zinc-900 transition-all active:scale-[0.98] uppercase tracking-[0.2em] text-[10px] text-center"
+                        <Link
+                            to="/viewapp"
+                            className="bg-white text-gray-700 px-8 py-4 rounded-xl font-bold border border-gray-200 hover:border-gray-900 transition-all active:scale-[0.98] text-center"
                         >
-                            Access Archives
+                            My Appointments
                         </Link>
                     </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-zinc-100 border border-zinc-100 rounded-3xl overflow-hidden animate-in fade-in zoom-in-95 duration-1000 delay-300 shadow-sm">
-                    <div className="bg-white p-12 space-y-6 hover:bg-zinc-50/50 transition-colors duration-500 group">
-                        <div className="w-10 h-10 border border-zinc-200 rounded-xl flex items-center justify-center text-xs font-bold text-zinc-400 group-hover:bg-zinc-900 group-hover:text-white group-hover:border-zinc-900 transition-all">01</div>
-                        <h3 className="text-lg font-semibold tracking-tight">Rapid Scheduling</h3>
-                        <p className="text-zinc-400 text-sm leading-relaxed font-medium">Native synchronization for all healthcare domains. Real-time slot availability.</p>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 animate-in fade-in zoom-in-95 duration-1000 delay-300">
+                    <div className="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:shadow-blue-50 transition-all duration-500 group">
+                        <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600 mb-6 group-hover:bg-blue-600 group-hover:text-white transition-all text-xl">📅</div>
+                        <h3 className="text-xl font-bold text-gray-900 mb-3">Easy Booking</h3>
+                        <p className="text-gray-500 leading-relaxed">Schedule consultations with your preferred doctors at your convenience.</p>
                     </div>
 
-                    <div className="bg-white p-12 space-y-6 hover:bg-zinc-50/50 transition-colors duration-500 group border-l border-zinc-100">
-                        <div className="w-10 h-10 border border-zinc-200 rounded-xl flex items-center justify-center text-xs font-bold text-zinc-400 group-hover:bg-zinc-900 group-hover:text-white group-hover:border-zinc-900 transition-all">02</div>
-                        <h3 className="text-lg font-semibold tracking-tight">Verified Domain</h3>
-                        <p className="text-zinc-400 text-sm leading-relaxed font-medium">Access board-certified practitioners across multiple clinical nodes.</p>
+                    <div className="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:shadow-blue-50 transition-all duration-500 group">
+                        <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600 mb-6 group-hover:bg-blue-600 group-hover:text-white transition-all text-xl">👨‍⚕️</div>
+                        <h3 className="text-xl font-bold text-gray-900 mb-3">Expert Doctors</h3>
+                        <p className="text-gray-500 leading-relaxed">Access a wide range of certified specialists across various departments.</p>
                     </div>
 
-                    <div className="bg-white p-12 space-y-6 hover:bg-zinc-50/50 transition-colors duration-500 group border-l border-zinc-100">
-                        <div className="w-10 h-10 border border-zinc-200 rounded-xl flex items-center justify-center text-xs font-bold text-zinc-400 group-hover:bg-zinc-900 group-hover:text-white group-hover:border-zinc-900 transition-all">03</div>
-                        <h3 className="text-lg font-semibold tracking-tight">Secured Logs</h3>
-                        <p className="text-zinc-400 text-sm leading-relaxed font-medium">Encrypted medical history archives accessible from any terminal.</p>
+                    <div className="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:shadow-blue-50 transition-all duration-500 group">
+                        <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600 mb-6 group-hover:bg-blue-600 group-hover:text-white transition-all text-xl">📂</div>
+                        <h3 className="text-xl font-bold text-gray-900 mb-3">Medical History</h3>
+                        <p className="text-gray-500 leading-relaxed">Keep track of all your past and upcoming appointments securely.</p>
                     </div>
                 </div>
             </main>
 
-            <footer className="max-w-6xl mx-auto w-full mt-24 pt-12 border-t border-zinc-100 flex flex-col md:flex-row justify-between items-center gap-8 animate-in fade-in duration-1000 delay-500 opacity-40">
-                <h4 className="text-zinc-900 font-bold text-[10px] uppercase tracking-[0.4em]">MediConnect Network</h4>
-                <div className="flex gap-12 text-[10px] font-bold uppercase tracking-widest text-zinc-500">
-                    <a href="#" className="hover:text-zinc-900 transition-colors">Privacy Protocol</a>
-                    <a href="#" className="hover:text-zinc-900 transition-colors">Legal Framework</a>
+            <footer className="max-w-6xl mx-auto w-full mt-24 pt-12 border-t border-gray-100 flex flex-col md:flex-row justify-between items-center gap-8 text-gray-400 text-sm">
+                <p>© 2026 MediConnect. All rights reserved.</p>
+                <div className="flex gap-8">
+                    <a href="#" className="hover:text-gray-900 transition-colors">Privacy Policy</a>
+                    <a href="#" className="hover:text-gray-900 transition-colors">Terms of Service</a>
                 </div>
             </footer>
         </div>

@@ -36,11 +36,31 @@ const loginControll = async (req, res) => {
     if (!email || !password)
       return res.json({ succ: false, mess: "fill all the fild" });
 
+    // to create the token
+
     const login_data = await login_services(email, password);
-    res.json({ succ: true, data: login_data, mess: "login Successfully" });
+
+    res.cookie("access_token", login_data.token);
+    // console.log(login_data.token)
+    res.json({ succ: true, data: login_data.data, mess: "login Successfully" });
   } catch (err) {
     res.json({ succ: false, mess: err.message });
   }
 };
 
-module.exports = { RegController, loginControll };
+// this is the check auth function
+const checkAuth = (req, res) => {
+  if (req.user) {
+    return res.json({ succ: true, data: req.user, mess: "Authenticated" });
+  } else {
+    return res.json({ succ: false, mess: "Not Authenticated" });
+  }
+};
+
+// this is the logout function
+const logout = (req, res) => {
+  res.clearCookie("access_token");
+  return res.json({ succ: true, mess: "Logged out successfully" });
+};
+
+module.exports = { RegController, loginControll, checkAuth, logout };

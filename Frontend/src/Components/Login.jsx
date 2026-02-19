@@ -28,16 +28,12 @@ const Login = () => {
         // console.log(formdata);
 
         try {
-            const res = await axios.post("http://localhost:4000/user_get", formdata);
+            const res = await axios.post("http://localhost:4000/user_get", formdata, { withCredentials: true });
             if (res.data.succ) {
                 alert("Login Successful");
                 setIsrole(res.data.data.role);
                 setIsloggin(true);
-                setUserId(res.data.data._id); // Store the patient/doctor ID
-                const { role, _id } = res.data.data;
-                localStorage.setItem("isLoggin", "true");
-                localStorage.setItem("isrole", role);
-                localStorage.setItem("userId", _id);
+                setUserId(res.data.data.id); // Store the patient/doctor ID
                 if (res.data.data.role === "doctor") {
                     navigate("/dhome");
                 } else {
@@ -52,46 +48,46 @@ const Login = () => {
         }
     }
 
+
     return (
-        <div className="min-h-screen bg-white text-zinc-900 selection:bg-zinc-100 flex items-center justify-center p-12">
-            <div className="w-full max-w-sm space-y-12 animate-in slide-in-from-bottom-5 fade-in duration-1000">
-                <div className="space-y-4 text-center">
-                    <h1 className="text-4xl font-semibold tracking-tighter">
-                        Access Terminal
+        <div className="min-h-screen bg-gray-50 flex items-center justify-center p-6">
+            <div className="w-full max-w-md bg-white rounded-2xl shadow-xl shadow-blue-100/50 p-10 space-y-8 animate-in fade-in zoom-in-95 duration-700">
+                <div className="text-center space-y-2">
+                    <h1 className="text-3xl font-bold text-gray-900 tracking-tight">
+                        Welcome Back
                     </h1>
-                    <p className="text-zinc-400 text-sm font-medium italic">
-                        Identification protocol required
+                    <p className="text-gray-500 text-sm">
+                        Please enter your details to sign in
                     </p>
                 </div>
 
-                <form onSubmit={HandleSubmit} className="space-y-10 group">
-                    <div className="space-y-8">
-                        <div className="relative border-l border-zinc-100 pl-8 space-y-2">
-                            <div className="absolute -left-[4.5px] top-0 w-2 h-2 bg-zinc-900 rounded-full"></div>
-                            <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-400">
-                                Node Email
+                <form onSubmit={HandleSubmit} className="space-y-6">
+                    <div className="space-y-4">
+                        <div className="space-y-1.5">
+                            <label className="text-sm font-semibold text-gray-700 ml-1">
+                                Email Address
                             </label>
                             <input
                                 type="email"
                                 value={formdata.email}
                                 name="email"
-                                className="w-full bg-transparent border-b border-zinc-100 py-3 text-sm focus:border-zinc-900 focus:outline-none transition-all duration-500 ease-in-out"
-                                placeholder="entity@network.db"
+                                className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 focus:outline-none transition-all duration-300"
+                                placeholder="name@example.com"
                                 onChange={HandleChange}
                                 required
                             />
                         </div>
 
-                        <div className="relative border-l border-zinc-100 pl-8 space-y-2">
-                            <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-400">
-                                Secure Pin
+                        <div className="space-y-1.5">
+                            <label className="text-sm font-semibold text-gray-700 ml-1">
+                                Password
                             </label>
                             <input
                                 type="password"
                                 value={formdata.password}
                                 name="password"
-                                className="w-full bg-transparent border-b border-zinc-100 py-3 text-sm focus:border-zinc-900 focus:outline-none transition-all duration-500 ease-in-out"
-                                placeholder="Access Hash"
+                                className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 focus:outline-none transition-all duration-300"
+                                placeholder="••••••••"
                                 onChange={HandleChange}
                                 required
                             />
@@ -100,31 +96,21 @@ const Login = () => {
 
                     <button
                         type="submit"
-                        className="group w-full bg-zinc-900 text-white font-bold h-16 rounded-full hover:bg-zinc-800 transition-all active:scale-[0.98] shadow-2xl shadow-zinc-200 flex items-center justify-center gap-4 group/btn">
-                        <span className="uppercase tracking-[0.3em] text-[10px]">
-                            Initialize link
-                        </span>
-                        <svg
-                            className="w-4 h-4 translate-x-0 group-hover/btn:translate-x-2 transition-transform duration-300"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor">
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M14 5l7 7m0 0l-7 7m7-7H3"
-                            />
-                        </svg>
+                        className="w-full bg-blue-600 text-white font-bold py-3.5 rounded-xl hover:bg-blue-700 active:scale-[0.98] transition-all shadow-lg shadow-blue-200">
+                        Sign In
                     </button>
                 </form>
 
-                <div className="text-center">
-                    <a
-                        href="/reg"
-                        className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 hover:text-zinc-900 transition-colors underline-offset-8 underline decoration-zinc-100 hover:decoration-zinc-300">
-                        Request Enrolment
-                    </a>
+                <div className="text-center pt-4">
+                    <p className="text-gray-500 text-sm">
+                        Don't have an account?{" "}
+                        <button
+                            onClick={() => navigate("/reg")}
+                            className="text-blue-600 font-bold hover:underline"
+                        >
+                            Create one
+                        </button>
+                    </p>
                 </div>
             </div>
         </div>

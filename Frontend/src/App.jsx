@@ -4,40 +4,54 @@ import Reg from "./Components/Reg";
 import Login from "./Components/Login";
 import Navbar from "./Components/Navbar";
 import DataContext from "./Components/DataContext";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 import { Route, Routes } from "react-router-dom";
 import Home from "./Doctor/Home";
 import Phome from "./Patient/Phome";
 import Application from "./Patient/Application";
 import ViewApp from "./Patient/ViewApp";
+import DoctorViewApp from "./Doctor/DoctorViewApp";
 
 function App() {
-  const [isLoggin, setIsloggin] = useState(localStorage.getItem("isLoggin") || false);
-  const [isrole, setIsrole] = useState(localStorage.getItem("isrole") || null);
-  const [userId, setUserId] = useState(localStorage.getItem("userId") || null);
+  const [isLoggin, setIsloggin] = useState(false);
+  const [isrole, setIsrole] = useState(null);
+  const [userId, setUserId] = useState(null);
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const res = await axios.get("http://localhost:4000/check_auth", {
+          withCredentials: true,
+        });
+        if (res.data.succ) {
+          setIsrole(res.data.data.role);
+          setIsloggin(true);
+          
+          setUserId(res.data.data.id);
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    checkAuth();
+  }, []);
+
 
   return (
-    <div className="selection:bg-zinc-100 selection:text-zinc-900 font-sans tracking-tight antialiased">
+    <div className="selection:bg-blue-100 selection:text-blue-900 font-sans tracking-tight antialiased">
       <DataContext.Provider
         value={{ setIsloggin, isLoggin, setIsrole, isrole, userId, setUserId }}>
         <Navbar />
         <Routes>
-          <Route
-            path="/"
-            element={
-              isLoggin ?
-                isrole === "doctor" ?
-                  <Home />
-                : <Phome />
-              : <Login />
-            }
-          />
+          <Route path="/" element={ isLoggin ?isrole === "doctor" ?<Home />: <Phome />: <Login />}/>
           <Route path="/reg" element={<Reg />} />
           <Route path="/login" element={<Login />} />
           <Route path="/dhome" element={<Home />} />
           <Route path="/phome" element={<Phome />} />
           <Route path="/application" element={<Application />} />
           <Route path="/viewapp" element={<ViewApp />} />
+          <Route path="/doctorviewapp" element={<DoctorViewApp />} />
         </Routes>
       </DataContext.Provider>
     </div>
