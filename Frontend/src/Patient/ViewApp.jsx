@@ -64,12 +64,12 @@ const ViewApp = () => {
                 className="group bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-xl hover:shadow-blue-50 transition-all duration-300">
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
                   <div className="flex items-center gap-5">
-                    <div className="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center text-2xl">
-                      👨‍⚕️
+                    <div className="w-14 h-14 bg-blue-50 uppercase font-bold rounded-2xl flex items-center justify-center text-2xl">
+                      {val.doctorId?.name?.charAt(0) || "Unknown"}
                     </div>
                     <div>
-                      <h3 className="text-xl font-bold text-gray-900">
-                        Dr. {val.doctorId?.name || "Unknown"}
+                      <h3 className="text-xl font-bold text-gray-900 ">
+                        Dr. <span className="uppercase">{val.doctorId?.name || "Unknown"}</span> 
                       </h3>
                       <p className="text-gray-500 text-sm font-medium">
                         {val.doctorId?.email || "No email available"}

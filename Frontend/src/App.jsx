@@ -12,6 +12,7 @@ import Phome from "./Patient/Phome";
 import Application from "./Patient/Application";
 import ViewApp from "./Patient/ViewApp";
 import DoctorViewApp from "./Doctor/DoctorViewApp";
+import LandingPage from "./Components/LandingPage";
 
 function App() {
   const [isLoggin, setIsloggin] = useState(false);
@@ -27,7 +28,7 @@ function App() {
         if (res.data.succ) {
           setIsrole(res.data.data.role);
           setIsloggin(true);
-          
+
           setUserId(res.data.data.id);
         }
       } catch (err) {
@@ -40,11 +41,20 @@ function App() {
 
   return (
     <div className="selection:bg-blue-100 selection:text-blue-900 font-sans tracking-tight antialiased">
+      <style>{`
+        @keyframes scroll {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        .animate-scroll {
+          animation: scroll 30s linear infinite;
+        }
+      `}</style>
       <DataContext.Provider
         value={{ setIsloggin, isLoggin, setIsrole, isrole, userId, setUserId }}>
         <Navbar />
         <Routes>
-          <Route path="/" element={ isLoggin ?isrole === "doctor" ?<Home />: <Phome />: <Login />}/>
+          <Route path="/" element={isLoggin ? isrole === "doctor" ? <Home /> : <Phome /> : <LandingPage />} />
           <Route path="/reg" element={<Reg />} />
           <Route path="/login" element={<Login />} />
           <Route path="/dhome" element={<Home />} />

@@ -72,9 +72,9 @@ function Navbar() {
             <Link
               to="/viewapp"
               className="text-gray-500 hover:text-blue-600 transition-colors">
-              My History
+              View Appointment
             </Link>
-            <button onClick={ handleLogout}>Logout </button>
+            <button onClick={ handleLogout} className=" hover:underline font-bold text-lg hover:cursor-pointer duration-300 border-2 w-20 rounded-lg bg-red-600/20"><span className="text-red-900/90">LogOut</span> </button>
           </div>
         )}
 

@@ -41,79 +41,114 @@ const DoctorViewApp = () => {
     };
 
     return (
-        <div className="container mx-auto p-6 bg-gray-50 min-h-screen">
-            <div className="bg-white rounded-xl shadow-md p-6">
-                <h1 className="text-3xl font-extrabold mb-8 text-gray-800 border-b pb-4">My Appointments</h1>
+        <div className="min-h-screen bg-slate-50 pt-28 pb-12 px-8 font-sans">
+            <div className="max-w-6xl mx-auto space-y-8">
+                <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-2 border-b border-slate-200/60">
+                    <div>
+                        <h1 className="text-4xl font-black text-slate-900 tracking-tight mb-2">Medical Dashboard</h1>
+                        <p className="text-slate-500 font-medium">Overview of your patient appointments</p>
+                    </div>
+                    <div className="text-right hidden md:block">
+                        <span className="block text-xs font-bold uppercase tracking-widest text-slate-400 mb-1">Current Date</span>
+                        <span className="text-lg font-bold text-slate-700">{new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</span>
+                    </div>
+                </div>
 
-                <div className="overflow-x-auto rounded-lg border border-gray-100">
-                    <table className="min-w-full bg-white divide-y divide-gray-200">
-                        <thead className="bg-gray-50">
-                            <tr>
-                                <th className="px-6 py-4 text-left font-bold text-gray-600 uppercase text-xs tracking-wider">Patient Details</th>
-                                <th className="px-6 py-4 text-left font-bold text-gray-600 uppercase text-xs tracking-wider">Schedule</th>
-                                <th className="px-6 py-4 text-left font-bold text-gray-600 uppercase text-xs tracking-wider">Status</th>
-                                <th className="px-6 py-4 text-center font-bold text-gray-600 uppercase text-xs tracking-wider">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody className="divide-y divide-gray-200">
-                            {doctorappointment.length > 0 ? (
-                                doctorappointment.map((val, ind) => (
-                                    <tr key={ind} className="hover:bg-blue-50/30 transition duration-150">
-                                        <td className="px-6 py-5">
-                                            <div className="flex flex-col">
-                                                <span className="font-semibold text-gray-900">{val.patientId?.name || "Unknown Patient"}</span>
-                                                <span className="text-sm text-gray-500">{val.patientId?.email || "No Email"}</span>
-                                            </div>
-                                        </td>
-                                        <td className="px-6 py-5">
-                                            <div className="flex flex-col">
-                                                <span className="text-gray-700 font-medium">🗓️ {val.date}</span>
-                                                <span className="text-gray-500 text-sm">⏰ {val.time}</span>
-                                            </div>
-                                        </td>
-                                        <td className="px-6 py-5">
-                                            <span className={`px-4 py-1.5 rounded-full text-xs font-bold uppercase ${val.status === 'approved' ? 'bg-green-100 text-green-700' :
-                                                val.status === 'reject' ? 'bg-red-100 text-red-700' :
-                                                    'bg-yellow-100 text-yellow-700'
-                                                }`}>
-                                                {val.status}
-                                            </span>
-                                        </td>
-                                        <td className="px-6 py-5 text-center">
-                                            {val.status === 'pending' ? (
-                                                <div className="flex justify-center space-x-3">
-                                                    <button
-                                                        onClick={() => handleStatusUpdate(val._id, 'approved')}
-                                                        className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition shadow-sm text-sm font-medium"
-                                                    >
-                                                        Accept
-                                                    </button>
-                                                    <button
-                                                        onClick={() => handleStatusUpdate(val._id, 'reject')}
-                                                        className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition shadow-sm text-sm font-medium"
-                                                    >
-                                                        Reject
-                                                    </button>
+                <div className="bg-white rounded-[2rem] shadow-2xl shadow-slate-200/60 border border-slate-100 overflow-hidden relative">
+                    {/* Decorative top pattern */}
+                    <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-600/70 via-indigo-600/70 to-violet-600/70"></div>
+
+                    <div className="overflow-x-auto">
+                        <table className="min-w-full divide-y divide-slate-100">
+                            <thead>
+                                <tr className="bg-slate-900 text-white">
+                                    <th className="px-8 py-5 text-left text-xs font-bold uppercase tracking-widest text-slate-300">Patient Data</th>
+                                    <th className="px-8 py-5 text-left text-xs font-bold uppercase tracking-widest text-slate-300">Schedule Info</th>
+                                    <th className="px-8 py-5 text-left text-xs font-bold uppercase tracking-widest text-slate-300">Current Status</th>
+                                    <th className="px-8 py-5 text-center text-xs font-bold uppercase tracking-widest text-slate-300">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody className="bg-white divide-y divide-slate-100">
+                                {doctorappointment.length > 0 ? (
+                                    doctorappointment.map((val, ind) => (
+                                        <tr key={ind} className="hover:bg-slate-50/80 transition-colors duration-200 group">
+                                            <td className="px-8 py-6">
+                                                <div className="flex items-center gap-4">
+                                                    <div className="h-10 w-10 rounded-full uppercase bg-indigo-100 flex items-center justify-center text-indigo-700 font-bold text-lg">
+                                                        {val.patientId?.name?.charAt(0) || "P"}
+                                                    </div>
+                                                    <div className="flex flex-col">
+                                                        <span className="font-bold uppercase text-slate-900 text-sm">{val.patientId?.name || "Unknown"}</span>
+                                                        <span className="text-xs font-medium text-slate-500">{val.patientId?.email || "No Email"}</span>
+                                                    </div>
                                                 </div>
-                                            ) : (
-                                                <span className="text-gray-400 text-sm italic">No actions available</span>
-                                            )}
+                                            </td>
+                                            <td className="px-8 py-6">
+                                                <div className="space-y-1">
+                                                    <div className="flex items-center gap-2 text-slate-700 text-sm font-semibold">
+                                                        {val.date}
+                                                    </div>
+                                                    <div className="flex items-center gap-2 text-indigo-600 text-xs font-bold bg-indigo-50 w-fit px-2 py-1 rounded-md">
+                                                        {val.time}
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td className="px-8 py-6">
+                                                <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide border ${val.status === 'approved'
+                                                    ? 'bg-emerald-50 text-emerald-700 border-emerald-100'
+                                                    : val.status === 'reject'
+                                                        ? 'bg-rose-50 text-rose-700 border-rose-100'
+                                                        : 'bg-amber-50 text-amber-700 border-amber-100'
+                                                    }`}>
+                                                    <span className={`w-1.5 h-1.5 rounded-full ${val.status === 'approved' ? 'bg-emerald-500' : val.status === 'reject' ? 'bg-rose-500' : 'bg-amber-500'
+                                                        }`}></span>
+                                                    {val.status}
+                                                </span>
+                                            </td>
+                                            <td className="px-8 py-6">
+                                                {val.status === 'pending' ? (
+                                                    <div className="flex justify-center gap-3 opacity-100 transition-opacity">
+                                                        <button
+                                                            onClick={() => handleStatusUpdate(val._id, 'approved')}
+                                                            className="flex items-center gap-2 px-4 py-2 bg-emerald-600 text-white rounded-xl hover:bg-emerald-700 hover:shadow-lg hover:shadow-emerald-200 transition-all active:scale-95 text-xs font-bold uppercase tracking-wide"
+                                                        >
+                                                            Approve
+                                                        </button>
+                                                        <button
+                                                            onClick={() => handleStatusUpdate(val._id, 'reject')}
+                                                            className="flex items-center gap-2 px-4 py-2 bg-rose-50 text-rose-600 border border-rose-100 rounded-xl hover:bg-rose-100 hover:border-rose-200 transition-all active:scale-95 text-xs font-bold uppercase tracking-wide"
+                                                        >
+                                                            Decline
+                                                        </button>
+                                                    </div>
+                                                ) : (
+                                                    <div className="text-center">
+                                                        <span className="text-slate-300 text-xs font-medium uppercase tracking-widest">Completed</span>
+                                                    </div>
+                                                )}
+                                            </td>
+                                        </tr>
+                                    ))
+                                ) : (
+                                    <tr>
+                                        <td colSpan="4" className="px-8 py-24 text-center">
+                                            <div className="flex flex-col items-center justify-center text-slate-400">
+                                                <div className="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center mb-4">
+                                                    <span className="text-2xl">📅</span>
+                                                </div>
+                                                <p className="text-lg font-medium text-slate-600">No appointments scheduled</p>
+                                                <p className="text-sm">New appointment requests will appear here</p>
+                                            </div>
                                         </td>
                                     </tr>
-                                ))
-                            ) : (
-                                <tr>
-                                    <td colSpan="4" className="px-6 py-12 text-center text-gray-500 italic">
-                                        No appointments found for you.
-                                    </td>
-                                </tr>
-                            )}
-                        </tbody>
-                    </table>
+                                )}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
     )
-}
+};
 
 export default DoctorViewApp
