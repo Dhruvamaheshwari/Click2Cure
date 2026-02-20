@@ -55,13 +55,13 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={isLoggin ? isrole === "doctor" ? <Home /> : <Phome /> : <LandingPage />} />
-          <Route path="/reg" element={<Reg />} />
+          <Route path="/reg" element={ <Reg />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/dhome" element={<Home />} />
-          <Route path="/phome" element={<Phome />} />
-          <Route path="/application" element={<Application />} />
-          <Route path="/viewapp" element={<ViewApp />} />
-          <Route path="/doctorviewapp" element={<DoctorViewApp />} />
+          <Route path="/dhome" element={isLoggin?isrole === "doctor"? <Home /> : <Phome />: <LandingPage />} />
+          <Route path="/phome" element={isLoggin? <Phome /> : <LandingPage />} />
+          <Route path="/application" element={isLoggin? <Application /> : <LandingPage />} />
+          <Route path="/viewapp" element={isLoggin? <ViewApp /> : <LandingPage />} />
+          <Route path="/doctorviewapp" element={isLoggin? <DoctorViewApp /> : <LandingPage />} />
         </Routes>
       </DataContext.Provider>
     </div>

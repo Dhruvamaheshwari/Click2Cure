@@ -27,14 +27,16 @@ function Navbar() {
 
   return (
     <nav className="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-zinc-100 flex items-center justify-between px-8 h-20 transition-all duration-500 ease-in-out">
+      <Link to='/'>
       <div className="flex items-center gap-3 group px-4">
-        <div className="w-8 h-8 bg-zinc-900 rounded-lg flex items-center justify-center transition-transform group-hover:rotate-[15deg] duration-300">
-          <span className="text-white font-black text-xs">C+</span>
+        <div className="w-8 h-8  animate-pulse duration-500 bg-zinc-900 rounded-lg flex items-center justify-center transition-transform ">
+          <span className="text-white font-black text-md ">C 2</span>
         </div>
         <h1 className="text-sm font-bold uppercase tracking-[0.2em] text-zinc-900">
           Click <span className="text-xl text-fuchsia-600 font-bold">2</span> Cure
         </h1>
       </div>
+      </Link>
 
       <div className="flex items-center gap-12 font-medium">
         {isLoggin && isrole === "doctor" && (
