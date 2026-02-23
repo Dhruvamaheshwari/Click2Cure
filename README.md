@@ -12,7 +12,21 @@
 - **Responsive Design:** Modern, minimalist UI built with React 19 and Tailwind CSS v4.
 - **Secure Data:** Password hashing with Bcrypt and persistent MongoDB storage.
 
-## 🛠️ Tech Stack
+## � Screenshots
+
+|                              Landing Page                              |                             Login Page                             |
+| :--------------------------------------------------------------------: | :----------------------------------------------------------------: |
+| ![Landing Page](https://via.placeholder.com/400x200?text=Landing+Page) | ![Login Page](https://via.placeholder.com/400x200?text=Login+Page) |
+
+|                                Patient Dashboard                                 |                                Doctor Dashboard                                |
+| :------------------------------------------------------------------------------: | :----------------------------------------------------------------------------: |
+| ![Patient Dashboard](https://via.placeholder.com/400x200?text=Patient+Dashboard) | ![Doctor Dashboard](https://via.placeholder.com/400x200?text=Doctor+Dashboard) |
+
+|                                 Appointment Booking                                  |
+| :----------------------------------------------------------------------------------: |
+| ![Appointment Booking](https://via.placeholder.com/400x200?text=Appointment+Booking) |
+
+## �🛠️ Tech Stack
 
 ### Frontend
 
