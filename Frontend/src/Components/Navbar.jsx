@@ -3,7 +3,7 @@
 import { useContext } from "react";
 import DataContext from "./DataContext";
 import { Link, useNavigate } from "react-router";
-import axios from "axios";
+import api from "../api";
 
 function Navbar() {
   const { isLoggin, setIsloggin, isrole, setIsrole, setUserId } = useContext(DataContext);
@@ -11,9 +11,7 @@ function Navbar() {
 
   const handleLogout = async () => {
     try {
-      const res = await axios.get("http://localhost:4000/logout", {
-        withCredentials: true,
-      });
+      const res = await api.get("/logout");
       if (res.data.succ) {
         setIsloggin(false);
         setIsrole(null);
@@ -28,14 +26,14 @@ function Navbar() {
   return (
     <nav className="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-zinc-100 flex items-center justify-between px-8 h-20 transition-all duration-500 ease-in-out">
       <Link to='/'>
-      <div className="flex items-center gap-3 group px-4">
-        <div className="w-12 h-8  animate-pulse duration-500 bg-zinc-800 rounded-lg flex items-center justify-center transition-transform ">
-          <span className="text-white font-black text-md">C 2</span>
+        <div className="flex items-center gap-3 group px-4">
+          <div className="w-12 h-8  animate-pulse duration-500 bg-zinc-800 rounded-lg flex items-center justify-center transition-transform ">
+            <span className="text-white font-black text-md">C 2</span>
+          </div>
+          <h1 className="text-sm font-bold uppercase tracking-[0.2em] text-zinc-900 ">
+            Click <span className="text-xl text-red-600/60 font-bold ">2</span> Cure
+          </h1>
         </div>
-        <h1 className="text-sm font-bold uppercase tracking-[0.2em] text-zinc-900 ">
-          Click <span className="text-xl text-red-600/60 font-bold ">2</span> Cure
-        </h1>
-      </div>
       </Link>
 
       <div className="flex items-center gap-12 font-medium">
@@ -76,7 +74,7 @@ function Navbar() {
               className="text-gray-500 hover:text-blue-600 transition-colors">
               View Appointment
             </Link>
-            <button onClick={ handleLogout} className=" hover:underline font-bold text-lg hover:cursor-pointer duration-300 border-2 w-20 rounded-lg bg-red-600/20"><span className="text-red-900/90">LogOut</span> </button>
+            <button onClick={handleLogout} className=" hover:underline font-bold text-lg hover:cursor-pointer duration-300 border-2 w-20 rounded-lg bg-red-600/20"><span className="text-red-900/90">LogOut</span> </button>
           </div>
         )}
 

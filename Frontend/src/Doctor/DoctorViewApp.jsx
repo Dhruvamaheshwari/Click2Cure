@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import DataContext from '../Components/DataContext'
-import axios from 'axios'
+import api from '../api'
 
 const DoctorViewApp = () => {
 
@@ -12,7 +12,7 @@ const DoctorViewApp = () => {
     useEffect(() => {
         async function show_doctor_appointement_get() {
             try {
-                const res = await axios.get(`http://localhost:4000/show_doctor_appointement_get?doctorId=${userId}`)
+                const res = await api.get(`/show_doctor_appointement_get?doctorId=${userId}`)
                 console.log(res.data.mess)
                 setdoctorAppointment_get(res.data.mess)
             } catch (error) {
@@ -25,7 +25,7 @@ const DoctorViewApp = () => {
 
     const handleStatusUpdate = async (id, newStatus) => {
         try {
-            const res = await axios.patch(`http://localhost:4000/update_status`, {
+            const res = await api.patch(`/update_status`, {
                 appointmentId: id,
                 status: newStatus
             });

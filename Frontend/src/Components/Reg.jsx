@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import axios from "axios";
+import api from "../api";
 import Login from "./Login";
 
 const Reg = () => {
@@ -22,7 +22,7 @@ const Reg = () => {
         e.preventDefault();
 
         try {
-            const res = await axios.post("http://localhost:4000/user_post", formdata);
+            const res = await api.post("/user_post", formdata);
             if (res.data.succ) {
                 alert("Registration Successful");
                 setIsRegistered(true);

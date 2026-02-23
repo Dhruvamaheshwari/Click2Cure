@@ -5,7 +5,7 @@ import Login from "./Components/Login";
 import Navbar from "./Components/Navbar";
 import DataContext from "./Components/DataContext";
 import { useState, useEffect } from "react";
-import axios from "axios";
+import api from "./api";
 import { Route, Routes } from "react-router-dom";
 import Home from "./Doctor/Home";
 import Phome from "./Patient/Phome";
@@ -22,9 +22,7 @@ function App() {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const res = await axios.get("http://localhost:4000/check_auth", {
-          withCredentials: true,
-        });
+        const res = await api.get("/check_auth");
         if (res.data.succ) {
           setIsrole(res.data.data.role);
           setIsloggin(true);
@@ -55,13 +53,13 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={isLoggin ? isrole === "doctor" ? <Home /> : <Phome /> : <LandingPage />} />
-          <Route path="/reg" element={ <Reg />} />
+          <Route path="/reg" element={<Reg />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/dhome" element={isLoggin?isrole === "doctor"? <Home /> : <Phome />: <LandingPage />} />
-          <Route path="/phome" element={isLoggin? <Phome /> : <LandingPage />} />
-          <Route path="/application" element={isLoggin? <Application /> : <LandingPage />} />
-          <Route path="/viewapp" element={isLoggin? <ViewApp /> : <LandingPage />} />
-          <Route path="/doctorviewapp" element={isLoggin? <DoctorViewApp /> : <LandingPage />} />
+          <Route path="/dhome" element={isLoggin ? isrole === "doctor" ? <Home /> : <Phome /> : <LandingPage />} />
+          <Route path="/phome" element={isLoggin ? <Phome /> : <LandingPage />} />
+          <Route path="/application" element={isLoggin ? <Application /> : <LandingPage />} />
+          <Route path="/viewapp" element={isLoggin ? <ViewApp /> : <LandingPage />} />
+          <Route path="/doctorviewapp" element={isLoggin ? <DoctorViewApp /> : <LandingPage />} />
         </Routes>
       </DataContext.Provider>
     </div>

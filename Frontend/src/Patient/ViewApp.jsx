@@ -1,6 +1,6 @@
 /** @format */
 
-import axios from "axios";
+import api from "../api";
 import React, { useEffect, useState, useContext } from "react";
 import DataContext from "../Components/DataContext";
 
@@ -12,8 +12,8 @@ const ViewApp = () => {
     async function appointment_get() {
       try {
         // pass the userId as a query parameter so the backend filters accordingly
-        const res = await axios.get(
-          `http://localhost:4000/appointment_get?patientId=${userId}`,
+        const res = await api.get(
+          `/appointment_get?patientId=${userId}`,
         );
         if (res.data.succ) {
           setAppointment_get(res.data.mess);
@@ -69,7 +69,7 @@ const ViewApp = () => {
                     </div>
                     <div>
                       <h3 className="text-xl font-bold text-gray-900 ">
-                        Dr. <span className="uppercase">{val.doctorId?.name || "Unknown"}</span> 
+                        Dr. <span className="uppercase">{val.doctorId?.name || "Unknown"}</span>
                       </h3>
                       <p className="text-gray-500 text-sm font-medium">
                         {val.doctorId?.email || "No email available"}

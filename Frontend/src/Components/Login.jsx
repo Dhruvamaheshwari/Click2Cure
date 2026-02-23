@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useState } from "react";
-import axios from "axios";
+import api from "../api";
 import { useContext } from "react";
 import DataContext from "./DataContext";
 import { useNavigate } from "react-router";
@@ -28,7 +28,7 @@ const Login = () => {
         // console.log(formdata);
 
         try {
-            const res = await axios.post("http://localhost:4000/user_get", formdata, { withCredentials: true });
+            const res = await api.post("/user_get", formdata);
             if (res.data.succ) {
                 alert("Login Successful");
                 setIsrole(res.data.data.role);

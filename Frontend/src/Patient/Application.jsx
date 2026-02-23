@@ -1,6 +1,6 @@
 /** @format */
 
-import axios from "axios";
+import api from "../api";
 import { useEffect, useState, useContext } from "react";
 import DataContext from "../Components/DataContext";
 
@@ -40,8 +40,8 @@ function Application() {
     console.log("Appointment Data:", appointmentData);
 
     try {
-      const res = await axios.post(
-        "http://localhost:4000/appointment",
+      const res = await api.post(
+        "/appointment",
         appointmentData,
       );
       if (res.data.succ) {
@@ -60,7 +60,7 @@ function Application() {
   useEffect(() => {
     async function DoctorData() {
       try {
-        const res = await axios.get("http://localhost:4000/alldoctor");
+        const res = await api.get("/alldoctor");
         setDoctor(res.data.mess);
       } catch (err) {
         console.error("Error fetching doctors:", err);
@@ -136,7 +136,7 @@ function Application() {
               <span className="flex items-center justify-center w-6 h-6 bg-blue-100 text-blue-600 rounded-full text-xs">3</span>
               Schedule Date & Time
             </label>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">
                 <span className="text-xs font-semibold text-gray-500 ml-1">Select Date</span>
