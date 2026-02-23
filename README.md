@@ -2,68 +2,134 @@
 
 # MediConnect - Patient-Doctor Management System
 
-**MediConnect** is a modern, high-contrast minimalist healthcare application designed for streamlined medical consultations. It features a sophisticated, "GPT-style" Zinc/White aesthetic with micro-interactions and a multi-step appointment booking protocol.
+**MediConnect** (Mini pro 2) is a comprehensive full-stack application designed to facilitate seamless interaction between doctors and patients. It provides a platform for booking appointments, managing schedules, and maintaining medical records securely.
 
----
+## 🚀 Features
 
-## 🏛️ Project Architecture
+- **Role-Based Access:** Distinct portals for Doctors and Patients.
+- **User Authentication:** Secure Login and Registration using JWT (JSON Web Tokens).
+- **Appointment Management:** Patients can book appointments; Doctors can view their schedules.
+- **Responsive Design:** Modern, minimalist UI built with React 19 and Tailwind CSS v4.
+- **Secure Data:** Password hashing with Bcrypt and persistent MongoDB storage.
 
-The project is divided into two primary nodes:
+## 🛠️ Tech Stack
 
-- **[Frontend](./Frontend)**: A React-based interface powered by Vite and Tailwind CSS (v4).
-- **[Backend](./Backend)**: A Node.js/Express server using MongoDB for persistent record-keeping.
+### Frontend
 
----
+- **Framework:** React 19 (via Vite)
+- **Styling:** Tailwind CSS v4 (Zinc Palette, Backpack Blur)
+- **Routing:** React Router 7
+- **State Management:** React Context API
+- **HTTP Client:** Axios
 
-## 🚀 Quick Start
+### Backend
 
-### 1. Database Configuration
+- **Runtime:** Node.js
+- **Framework:** Express.js
+- **Database:** MongoDB (with Mongoose ODM)
+- **Authentication:** JWT (JSON Web Tokens) & Bcrypt
+- **Middleware:** CORS, Cookie-Parser
 
-Ensure you have a MongoDB instance running. Create a `.env` file in the `Backend/` directory:
+## 📋 Prerequisites
 
-```env
-# Example configuration
-MONGO_URI=your_mongodb_connection_string
-PORT=4000
+Before running this project, ensure you have the following installed:
+
+- [Node.js](https://nodejs.org/) (v14 or higher recommended)
+- [MongoDB](https://www.mongodb.com/) (Local installation or Atlas URI)
+
+## ⚙️ Installation & Setup
+
+### 1. Clone the Repository
+
+```bash
+git clone <repository-url>
+cd "Mini pro 2"
 ```
 
-### 2. Initialize Backend Node
+### 2. Backend Setup
+
+Navigate to the backend directory and install dependencies:
 
 ```bash
 cd Backend
 npm install
+```
+
+**Environment Variables:**
+Create a `.env` file in the `Backend` directory and add the following variables:
+
+```env
+MONGO_URL=mongodb://localhost:27017/mediconnect  # Or your MongoDB Atlas URI
+JWT_TOKNE_VALUE=your_secret_key_here          # Secret key for JWT signing
+PORT=4000
+```
+
+_Note: The variable name `JWT_TOKNE_VALUE` is currently used in the codebase (preserving the typo)._
+
+Start the backend server:
+
+```bash
 npm start
 ```
 
-### 3. Initialize Frontend Interface
+The backend server will run on `http://localhost:4000`.
+
+### 3. Frontend Setup
+
+Open a new terminal, navigate to the frontend directory, and install dependencies:
 
 ```bash
 cd Frontend
 npm install
+```
+
+Start the frontend development server:
+
+```bash
 npm run dev
 ```
 
----
+The frontend will typically run on `http://localhost:5173`.
 
-## 🧪 Key Features
+## 📂 Project Structure
 
-- **Multi-Role Access**: Independent terminals for Doctors and Patients.
-- **Protocol Booking**: A stepped UI sequence for selecting departments and specialists.
-- **Session Persistence**: `localStorage` based hydration ensuring users remain within their session across refreshes.
-- **Medical Archives**: Secure patient ledgers displaying appointment statuses and medical history.
-- **Minimalist Aesthetic**: Zinc-themed UI with advanced typography and smooth transitions.
+```
+Mini pro 2/
+├── Backend/                 # Node.js & Express Server
+│   ├── config/              # Database connection
+│   ├── controller/          # Route logic
+│   ├── model/               # Mongoose Schemas
+│   ├── routers/             # API Routes
+│   ├── services/            # Helper services (Auth, etc.)
+│   └── index.js             # Entry point
+│
+├── Frontend/                # React Application
+│   ├── src/
+│   │   ├── Components/      # Reusable UI components
+│   │   ├── Doctor/          # Doctor-specific views
+│   │   ├── Patient/         # Patient-specific views
+│   │   └── App.jsx          # Main application component
+│   └── vite.config.js       # Vite configuration
+│
+└── README.md                # Project documentation
+```
 
----
+## 📡 API Endpoints
 
-## 🛠️ Tech Stack
+| Method   | Endpoint           | Description             |
+| :------- | :----------------- | :---------------------- |
+| **POST** | `/user_post`       | User Registration       |
+| **POST** | `/user_get`        | User Login              |
+| **GET**  | `/alldoctor`       | Get list of all doctors |
+| **POST** | `/appointment`     | Book an appointment     |
+| **GET**  | `/appointment_get` | Get appointment details |
 
-| Component    | Technology                                            |
-| :----------- | :---------------------------------------------------- |
-| **Frontend** | React 19, Vite, Tailwind CSS 4, React Router 7, Axios |
-| **Backend**  | Node.js, Express, MongoDB, Mongoose                   |
-| **Styling**  | Zinc Palette, Backdrop Blur, Micro-interactions       |
-| **Storage**  | Browser Local Storage (Persistence)                   |
+## 🤝 Contributing
 
----
+Contributions, issues, and feature requests are welcome!
 
-Developed with a focus on high-end user experience and clinical efficiency.
+1.  Fork the Project
+2.  Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3.  Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4.  Push to the Branch (`git push origin feature/AmazingFeature`)
+5.  Open a Pull Request
