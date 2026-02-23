@@ -8,7 +8,8 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: ["http://localhost:5173",
+    "https://click2-cure-ps8v.vercel.app"],
     credentials: true,
   }),
 );
