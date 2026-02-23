@@ -13,6 +13,8 @@ app.use(
   }),
 );
 
+require('dotenv').config();
+
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -38,4 +40,4 @@ app.get("/", (req, res) => {
   res.send("Hello jee kya hall chaal");
 });
 
-app.listen(4000, () => console.log("server is started at port 4000"));
+app.listen(process.env.PORT, () => console.log("server is started at port 4000"));
